@@ -5,14 +5,13 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
 
-import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
 public class MailService {
 
+    //TODO: Configure the bean apart
     private final JavaMailSender javaMailSender;
 
     public MailService(JavaMailSender javaMailSender) {

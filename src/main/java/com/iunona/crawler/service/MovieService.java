@@ -14,15 +14,15 @@ public class MovieService {
 
     public void addMovie(Movie movie) {
         if (validateMovie())
-        moviesRepository.addMovie(movie);
+            moviesRepository.addMovie(movie);
     }
 
-    public void sendMovieMail () {
+    public void sendMovieMail() {
         mailService.sendMovieMail(moviesRepository.getMovies());
     }
 
     //TODO: write validating logic
-    private boolean validateMovie () {
+    private boolean validateMovie() {
         return true;
     }
 }

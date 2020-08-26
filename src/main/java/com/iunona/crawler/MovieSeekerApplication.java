@@ -13,7 +13,7 @@ import java.io.IOException;
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 public class MovieSeekerApplication {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         String url = "https://kinokrad.co/";
 
         ConfigurableApplicationContext context = SpringApplication.run(new Class<?>[]{MovieSeekerApplication.class}, args);
