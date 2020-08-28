@@ -34,7 +34,7 @@ public class MailService {
     public void sendMovieMail(List<Movie> movies) {
         SimpleMailMessage msg = new SimpleMailMessage();
         msg.setTo("panasenco.iunona@gmail.com");
-        msg.setSubject("My app spams you");
+        msg.setSubject("Movie list");
 
         String formattedMoviesList = formatMessage(movies);
         StringBuilder message = new StringBuilder("So this is the movie list from kinocrad.co for an awesome evening: \n");
