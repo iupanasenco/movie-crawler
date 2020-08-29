@@ -1,6 +1,9 @@
 package com.iunona.crawler.model;
 
+import javafx.scene.control.Hyperlink;
 import lombok.Data;
+
+import java.net.URL;
 
 @Data
 public class Movie {
@@ -9,6 +12,7 @@ public class Movie {
     private String genre;
     private Integer duration;
     private Integer rating;
+    private URL url;
 
     @Override
     public String toString() {
@@ -16,6 +20,7 @@ public class Movie {
                 ", year:" + year +
                 ", genre: " + genre +
                 ", duration: " + duration +
-                ", with rating: " + rating + ";\n";
+                ", with rating: " + rating + ";\n" +
+                url;
     }
 }

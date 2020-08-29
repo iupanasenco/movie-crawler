@@ -10,6 +10,7 @@ import org.jsoup.select.Elements;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.net.URL;
 
 @Service
 @Slf4j
@@ -22,6 +23,7 @@ public class MovieCrawler {
     public static final String RATING_HTML = "div.rating li.current-rating";
     public static final String MOVIE_INFO_HTML = "span.orange";
 
+    //TODO: add functionality
     public MovieCrawler(MovieService movieService) {
         this.movieService = movieService;
     }
@@ -35,6 +37,8 @@ public class MovieCrawler {
                     moviesElements) {
                 Movie movie = new Movie();
                 movie.setTitle(e.select(TITLE).text());
+                movie.setUrl(new URL(e.select(TITLE).attr("href")));
+
                 movie.setRating(Integer.parseInt(e.select(RATING_HTML).text()));
                 Elements movieInfo = e.select(MOVIE_INFO_HTML);
 
