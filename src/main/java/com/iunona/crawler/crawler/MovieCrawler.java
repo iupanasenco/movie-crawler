@@ -23,7 +23,6 @@ public class MovieCrawler {
     public static final String RATING_HTML = "div.rating li.current-rating";
     public static final String MOVIE_INFO_HTML = "span.orange";
 
-    //TODO: add functionality
     public MovieCrawler(MovieService movieService) {
         this.movieService = movieService;
     }
