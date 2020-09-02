@@ -5,6 +5,8 @@ import com.iunona.crawler.repo.MoviesRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @AllArgsConstructor
 @Service
 public class MovieService {
@@ -19,6 +21,10 @@ public class MovieService {
 
     public void sendMovieMail() {
         mailService.sendMovieMail(moviesRepository.getMovies());
+    }
+
+    public List<Movie> getMovieList() {
+        return moviesRepository.getMovies();
     }
 
     //TODO: write validating logic

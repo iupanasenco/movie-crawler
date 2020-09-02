@@ -11,29 +11,15 @@ import java.util.stream.Collectors;
 @Component
 public class MailService {
 
-    //TODO: Configure the bean apart
     private final JavaMailSender javaMailSender;
 
     public MailService(JavaMailSender javaMailSender) {
         this.javaMailSender = javaMailSender;
     }
 
-    public void sendTestEmail() {
-
-        SimpleMailMessage msg = new SimpleMailMessage();
-        msg.setTo("panasenco.iunona@gmail.com");
-
-        msg.setSubject("Testing from Spring Boot");
-        msg.setText("Hello World \n Spring Boot Email");
-
-        javaMailSender.send(msg);
-
-    }
-
-    //TODO: get rid of hardcoding
     public void sendMovieMail(List<Movie> movies) {
         SimpleMailMessage msg = new SimpleMailMessage();
-        msg.setTo("panasenco.iunona@gmail.com");
+        msg.setTo("some-mail@gmail.com");
         msg.setSubject("Movie list");
 
         String formattedMoviesList = formatMessage(movies);
@@ -44,11 +30,8 @@ public class MailService {
     }
 
     private String formatMessage(List<Movie> movies) {
-        String moviesFormatted = movies.stream().map(Movie::toString)
+        return movies.stream().map(Movie::toString)
                 .collect(Collectors.joining("\n"));
-        System.out.println(moviesFormatted);
-
-        return moviesFormatted;
 
     }
 }
