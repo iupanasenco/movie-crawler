@@ -10,26 +10,28 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import java.nio.charset.StandardCharsets;
-
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @AutoConfigureMockMvc
 @WebMvcTest
-class MovieControllerTest {
+class EmailSendControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
+
     @TestConfiguration
     static class MovieServiceTestContextConfiguration {
+
+        @Bean
+        public JavaMailSender javaMailSender() {
+            return new JavaMailSenderImpl();
+        }
 
         @Bean
         public MoviesRepository moviesRepository() {
@@ -42,8 +44,8 @@ class MovieControllerTest {
         }
 
         @Bean
-        public MailService mailService(){
-            return new MailService(new JavaMailSenderImpl());
+        public MailService mailService() {
+            return new MailService(javaMailSender());
         }
 
         @Bean
@@ -52,16 +54,18 @@ class MovieControllerTest {
         }
     }
 
+    //TODO:Implement Dumbster
+//    @Test
+//    void sendMail() throws Exception {
+//        mockMvc.perform(MockMvcRequestBuilders.get("/send-movie-mail?mail=test_email@mail.md"))
+//                .andExpect(status().isOk());
+//    }
+
     @Test
-    void crawlByCategory() throws Exception {
+    void sendMail_whenWrongMail() throws Exception {
 
-        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/crawl-movies-by-category?category=url2019"))
-                .andExpect(status().isOk())
-                .andReturn();
-        String requestResult = result.getResponse().getContentAsString(StandardCharsets.UTF_8);
+        mockMvc.perform(MockMvcRequestBuilders.get("/send-movie-mail?mail=wrong_mail"))
+                .andExpect(status().is5xxServerError());
 
-        assertNotNull(requestResult);
-        assertFalse(requestResult.isEmpty());
     }
-
 }
