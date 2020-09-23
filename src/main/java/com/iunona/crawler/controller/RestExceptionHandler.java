@@ -21,4 +21,5 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     private static class MovieCrawlerException {
         private String message;
     }
+
 }

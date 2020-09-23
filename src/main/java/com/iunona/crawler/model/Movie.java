@@ -1,6 +1,5 @@
 package com.iunona.crawler.model;
 
-import javafx.scene.control.Hyperlink;
 import lombok.Data;
 
 import java.net.URL;
