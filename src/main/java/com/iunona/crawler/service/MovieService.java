@@ -2,7 +2,7 @@ package com.iunona.crawler.service;
 
 import com.iunona.crawler.crawler.MovieCrawler;
 import com.iunona.crawler.model.Movie;
-import com.iunona.crawler.repo.MoviesRepository;
+import com.iunona.crawler.repo.MovieRepository;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ import java.util.List;
 public class MovieService {
 
     @Autowired
-    private MoviesRepository moviesRepository;
+    private MovieRepository movieRepository;
 
     @Autowired
     private MovieCrawler movieCrawler;
@@ -26,20 +26,20 @@ public class MovieService {
 
     public void addMovie(Movie movie) {
         if (validateMovie())
-            moviesRepository.addMovie(movie);
+            movieRepository.save(movie);
     }
 
     public void crawlMovieList(String url) {
         List<Movie> movies = movieCrawler.crawl(url);
-        if (!movies.isEmpty()) moviesRepository.setMovies(movies);
+        movies.forEach(movieRepository::save);
     }
 
     public void sendMovieMail(String mail) {
-        mailService.sendMovieMail(moviesRepository.getMovies(), mail);
+        mailService.sendMovieMail(movieRepository.findAll(), mail);
     }
 
     public List<Movie> getMovieList() {
-        return moviesRepository.getMovies();
+        return movieRepository.findAll();
     }
 
     //TODO: write validating logic

@@ -1,7 +1,7 @@
 package com.iunona.crawler;
 
 import com.iunona.crawler.crawler.MovieCrawler;
-import com.iunona.crawler.repo.MoviesRepository;
+import com.iunona.crawler.repo.MovieRepository;
 import com.iunona.crawler.service.MailService;
 import com.iunona.crawler.service.MovieService;
 import org.springframework.boot.test.context.TestConfiguration;
@@ -12,15 +12,17 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 @TestConfiguration
 public class AbstractTestConfig {
 
+    MovieRepository movieRepository;
+
     @Bean
     public JavaMailSender javaMailSender() {
         return new JavaMailSenderImpl();
     }
 
-    @Bean
-    public MoviesRepository moviesRepository() {
-        return new MoviesRepository();
-    }
+//    @Bean
+//    public MovieRepository moviesRepository() {
+//        return new MovieRepository();
+//    }
 
     @Bean
     public MovieCrawler movieCrawler() {
@@ -34,7 +36,7 @@ public class AbstractTestConfig {
 
     @Bean
     public MovieService movieService() {
-        return new MovieService(moviesRepository(), movieCrawler(), mailService());
+        return new MovieService(movieRepository, movieCrawler(), mailService());
     }
 
 }

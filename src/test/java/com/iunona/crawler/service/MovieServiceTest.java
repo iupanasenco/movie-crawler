@@ -1,7 +1,7 @@
 package com.iunona.crawler.service;
 
 import com.iunona.crawler.AbstractTestConfig;
-import com.iunona.crawler.repo.MoviesRepository;
+import com.iunona.crawler.repo.MovieRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -20,7 +20,7 @@ public class MovieServiceTest {
     private MovieService movieService;
 
     @Autowired
-    private MoviesRepository moviesRepository;
+    private MovieRepository movieRepository;
 
     @BeforeEach
     void setUp() {
@@ -29,7 +29,7 @@ public class MovieServiceTest {
     @Test
     void crawlMovieList() {
         movieService.crawlMovieList("https://kinokrad.co/");
-        assertFalse(moviesRepository.getMovies().isEmpty());
-        assertEquals(12, moviesRepository.getMovies().size());
+        assertFalse(movieRepository.findAll().isEmpty());
+        assertEquals(12, movieRepository.findAll().size());
     }
 }
