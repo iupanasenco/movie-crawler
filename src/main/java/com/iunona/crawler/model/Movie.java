@@ -4,6 +4,7 @@ import lombok.Data;
 import org.springframework.data.annotation.Id;
 
 import java.net.URL;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Data
@@ -19,13 +20,14 @@ public class Movie {
     private Integer duration;
     private Integer rating;
     private URL url;
+    private LocalDateTime crawlingTime;
 
     @Override
     public String toString() {
 
         return String.format(
-                "\n Movie[title: %s, year: '%d', genre:'%s', duration: '%d', with  rating: '%d'; \n '%s']",
-                title, year, genre, duration, rating, url.toString());
+                "\n Movie[title: %s, year: '%d', genre:'%s', duration: '%d', with  rating: '%d'; \n '%s', crawlingTime:'%s]",
+                title, year, genre, duration, rating, url.toString(), crawlingTime.toString());
     }
 
     @Override

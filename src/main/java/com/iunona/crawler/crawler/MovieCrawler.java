@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,6 +46,8 @@ public class MovieCrawler {
                 movie.setDuration(Integer.parseInt(duration));
 
                 movie.setYear(Integer.parseInt(movieInfo.get(0).text()));
+
+                movie.setCrawlingTime(LocalDateTime.now());
 
                 movieList.add(movie);
                 log.info("Crawled a movie: " + movie.getTitle());
